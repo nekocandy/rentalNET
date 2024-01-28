@@ -1,7 +1,7 @@
 import { env } from 'std-env'
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   devtools: { enabled: true },
   app: {
     head: {
@@ -55,10 +55,8 @@ export default defineNuxtConfig({
     isEnabled: false,
   },
   runtimeConfig: {
-    auth: {
-      SECRET: env.AUTH_SECRET as string,
-      DISCORD_CLIENT_ID: env.DISCORD_CLIENT_ID as string,
-      DISCORD_CLIENT_SECRET: env.DISCORD_CLIENT_SECRET as string,
+    public: {
+
     },
   },
 })
