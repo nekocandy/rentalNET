@@ -5,6 +5,11 @@ const router = useRouter()
 const shouldShowLogo = computed(() => {
   return !isUserLoggedIn.value || router.currentRoute.value.path === '/'
 })
+
+watch(isUserLoggedIn, (value) => {
+  if (!value && router.currentRoute.value.path !== '/')
+    router.push('/')
+})
 </script>
 
 <template>
