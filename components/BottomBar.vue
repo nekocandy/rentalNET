@@ -10,6 +10,11 @@ watch(isUserLoggedIn, (value) => {
   if (!value && router.currentRoute.value.path !== '/')
     router.push('/')
 })
+
+onMounted(() => {
+  if (!isUserLoggedIn.value && router.currentRoute.value.path !== '/')
+    router.push('/')
+})
 </script>
 
 <template>
@@ -21,8 +26,24 @@ watch(isUserLoggedIn, (value) => {
       <img h-12 :src="FlowImage" alt="">
     </div>
 
-    <div v-else>
-      {{ userData }}
+    <div v-else flex items-center justify-between gap-8>
+      <div flex items-center gap-4>
+        <div>
+          <img src="" alt="">
+        </div>
+
+        <span>Kirai</span>
+      </div>
+
+      <div flex items-center gap-4>
+        <!-- navigation -->
+      </div>
+
+      <div flex items-center gap-2>
+        <div h-8 w-8 rounded-full bg-blue i-material-symbols-account-circle />
+
+        <span>{{ userData?.addr }}</span>
+      </div>
     </div>
   </div>
 </template>
