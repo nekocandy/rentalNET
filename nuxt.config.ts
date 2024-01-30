@@ -56,7 +56,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-
+      NETWORK: env.NETWORK,
+      NC_ADDRESS: env.NC_ADDRESS,
     },
   },
 })
