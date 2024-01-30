@@ -2,7 +2,7 @@ import { config } from '@onflow/fcl'
 import flowJSON from '~/flow.json'
 
 const runtimeConfig = useRuntimeConfig().public
-export const network: 'mainnet' | 'testnet' | 'emulator' = (runtimeConfig.NETWORK as 'mainnet' | 'testnet' | 'emulator') || 'testnet'
+export const network: 'mainnet' | 'testnet' | 'emulator' = (runtimeConfig.NETWORK as 'mainnet' | 'testnet' | 'emulator') || 'emulator'
 
 const fclConfigInfo = {
   emulator: {
