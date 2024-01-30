@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import FlowImage from '~/assets/flow.svg'
-
-const isUserLoggedIn = computed(() => !!userData.value?.addr)
 </script>
 
 <template>
