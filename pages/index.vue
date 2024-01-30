@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <div class="h-screen items-center justify-center bg-zinc-900 font-mono text-white flex">
-    Hello, Pizza!
+  <div flex-col gap-12 class=" font-mono text-black">
+    <h1 />
   </div>
 </template>
 
