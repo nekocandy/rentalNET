@@ -17,6 +17,16 @@ async function login() {
         <img h-8 :src="FlowImage" alt="">
       </button>
     </div>
+
+    <div v-else flex flex-col gap-6>
+      <div text-2xl font-bold>
+        Welcome, {{ userData?.addr }}
+      </div>
+
+      <NuxtLink to="/home" w-full text-center px-4 bg-teal-700 px-6 py-4 border-2>
+        Continue to Home
+      </NuxtLink>
+    </div>
   </div>
 </template>
 
