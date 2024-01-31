@@ -41,6 +41,9 @@ export async function sendFlow(toAddress: string, amount: string) {
 }
 
 export async function getMyRentals() {
+  if (!userData.value?.addr)
+    return
+
   const data: RentalInformation[] = await fcl.query({
     cadence: GET_RENTALS,
   })

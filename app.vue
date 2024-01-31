@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Notifications, Notivue } from 'notivue'
+import { getMyRentals } from '~/utils/flow/utils'
 
 function checkIFrame() {
   const iframe = document.getElementById('FCL_IFRAME')
@@ -9,6 +10,10 @@ function checkIFrame() {
 
 onMounted(() => {
   setInterval(checkIFrame, 1000)
+
+  setInterval(async () => {
+    await getMyRentals()
+  }, 5000)
 })
 </script>
 
