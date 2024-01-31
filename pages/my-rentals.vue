@@ -19,7 +19,7 @@ onMounted(async () => {
     <h1 font-bold text-2xl>
       My Rentals
     </h1>
-    <div grid grid-cols-3 gap-8>
+    <div v-if="!isLoading && myRentals.length" grid grid-cols-3 gap-8>
       <RentalHouseInfo
         v-for="house in myRentals"
         :id="house.house_information.id"
@@ -30,6 +30,10 @@ onMounted(async () => {
         :house="house"
         :image="house.house_information.image"
       />
+    </div>
+
+    <div v-else>
+      You need to rent a house first!
     </div>
   </div>
 </template>
