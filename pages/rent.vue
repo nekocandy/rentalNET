@@ -132,10 +132,6 @@ onMounted(() => {
             {{ houseId }}
           </h2>
         </div>
-
-        <button px-8 py-2 font-bold w-full bg-teal-800 border-2>
-          Rent
-        </button>
       </div>
     </div>
 
@@ -180,7 +176,7 @@ onMounted(() => {
 
       <div flex flex-col gap-2>
         <button :disabled="!termsAccepted || !securityDepositPaid" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="sendRent">
-          Rent
+          Rent and Save Details on FLOW
         </button>
       </div>
     </div>
