@@ -6,11 +6,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
-      title: 'opinionated nuxt',
+      title: 'RentalNET',
       meta: [
         {
           name: 'description',
-          content: 'an opinionated nuxt starter template',
+          content: '',
         },
       ],
       link: [
