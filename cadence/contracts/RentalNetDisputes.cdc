@@ -19,7 +19,7 @@ pub contract RentalNetDisputes {
         }
     }
 
-    pub event noticeUpdated(
+    pub event DisputeUpdated(
         dispute_id: String,
         dispute_open: Bool
     )
@@ -45,7 +45,7 @@ pub contract RentalNetDisputes {
         for notice in self.dispute_store {
             if notice.dispute_id == dispute_id {
                 notice.dispute_open = dispute_open
-                emit noticeUpdated(
+                emit DisputeUpdated(
                     dispute_id: dispute_id,
                     dispute_open: dispute_open
                 )
