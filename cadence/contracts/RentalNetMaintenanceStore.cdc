@@ -3,13 +3,13 @@ pub contract RentalNetMaintenanceStore {
         pub let report_id: String
         pub let report_content: String
         pub let report_timestamp: UFix64
-        pub let report_user: String
+        pub let report_user: Address
         pub (set) var report_open: Bool
 
         init(
             report_id: String, 
             report_content: String,
-            report_user: String,
+            report_user: Address,
         ) {
             self.report_id = report_id
             self.report_content = report_content
@@ -24,7 +24,7 @@ pub contract RentalNetMaintenanceStore {
     pub fun addReport(
         report_id: String, 
         report_content: String,
-        report_user: String, 
+        report_user: Address, 
     ) {
         let new_report = ReportInformation(
             report_id: report_id, 
