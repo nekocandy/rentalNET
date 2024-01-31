@@ -12,6 +12,7 @@
     "flow:dev": "concurrently \"flow emulator start --verbose\" \"flow dev-wallet\" \"flow flowser\" \"flow dev\""
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.0",
     "@formkit/auto-animate": "^0.8.1",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@onflow/fcl": "1.10.0-alpha.4",
