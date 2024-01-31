@@ -1,4 +1,5 @@
 import { env } from 'std-env'
+import flowConfig from '~/flow.json'
 
 export default defineNuxtConfig({
   ssr: false,
@@ -57,7 +58,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       NETWORK: env.NETWORK,
-      NC_ADDRESS: env.NC_ADDRESS,
+      NC_ADDRESS: env.NC_ADDRESS || flowConfig.accounts.default.address,
       OWNER_ADDRESS: env.OWNER_ADDRESS,
     },
   },
