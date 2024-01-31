@@ -85,7 +85,7 @@
 	},
 	"accounts": {
 		"default": {
-			"address": "1e7bd52309d4e4b4",
+			"address": "082fb01090d0eed5",
 			"key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
 		},
 		"emulator-account": {
@@ -93,7 +93,7 @@
 			"key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
 		},
 		"utility": {
-			"address": "ec4809cd812aee0a",
+			"address": "e7623b544daf9023",
 			"key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
 		}
 	},
@@ -102,9 +102,9 @@
 			"default": [
 				"KiraiRentalDatabase",
 				"RentAgreementEntry",
+				"RentalNetDisputes",
 				"RentalNetMaintenanceStore",
-				"RentalNetNoticeBoard",
-				"RentalNetDisputes"
+				"RentalNetNoticeBoard"
 			],
 			"utility": []
 		}
