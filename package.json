@@ -22,6 +22,7 @@
     "@trpc/server": "^10.45.0",
     "consola": "^3.2.3",
     "dayjs": "^1.11.10",
+    "format-duration": "^3.0.2",
     "md-editor-v3": "^4.11.0",
     "nanoid": "^5.0.4",
     "next-auth": "4.22.5",
