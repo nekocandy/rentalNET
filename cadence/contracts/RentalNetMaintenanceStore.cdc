@@ -1,4 +1,4 @@
-pub contract RentalNetMaintainenceStore {
+pub contract RentalNetMaintenanceStore {
     pub struct ReportInformation {
         pub let report_id: String
         pub let report_content: String

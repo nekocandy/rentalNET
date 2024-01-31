@@ -67,6 +67,7 @@
     },
     "RentAgreementEntry": "cadence/contracts/RentAgreementEntry.cdc",
     "RentalNetMaintainenceStore": "cadence/contracts/RentalNetMaintainenceStore.cdc",
+    "RentalNetMaintenenceStore": "cadence/contracts/RentalNetMaintainenceStore.cdc",
     "ViewResolver": {
       "source": "cadence/contracts/utility/ViewResolver.cdc",
       "aliases": {
@@ -100,7 +101,8 @@
       "default": [
         "KiraiRentalDatabase",
         "RentAgreementEntry",
-        "RentalNetMaintainenceStore"
+        "RentalNetMaintainenceStore",
+        "RentalNetMaintenenceStore"
       ],
       "utility": []
     }
