@@ -12,6 +12,10 @@ const NAVIGATION_ITEMS = [
     name: 'Auto Payment',
     path: '/auto-pay',
   },
+  {
+    name: 'Transparent Maintenance Requests',
+    path: '/transparent-maintenance',
+  },
 ]
 </script>
 

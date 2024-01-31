@@ -13,3 +13,11 @@ export interface HouseInformation {
   location: string
   image: string
 }
+
+export interface ReportData {
+  report_id: string
+  report_content: string
+  report_timestamp: string
+  report_user: string
+  report_open: boolean
+}
