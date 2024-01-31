@@ -1,5 +1,5 @@
 import { env } from 'std-env'
-import flowConfig from '~/flow.json'
+import flowConfig from './flow.json'
 
 export default defineNuxtConfig({
   ssr: false,
