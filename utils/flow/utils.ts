@@ -1,4 +1,5 @@
 import * as fcl from '@onflow/fcl'
+import GET_RENTALS from '~/cadence/scripts/getRentals.cdc?raw'
 
 export async function sendFlow(toAddress: string, amount: string) {
   const transaction = await fcl.mutate({
@@ -37,4 +38,13 @@ export async function sendFlow(toAddress: string, amount: string) {
   })
 
   return transaction
+}
+
+export async function getMyRentals() {
+  const data: RentalInformation[] = await fcl.query({
+    cadence: GET_RENTALS,
+  })
+
+  const myRentalData = data.filter(d => d.renter === userData.value?.addr)
+  myRentals.value = myRentalData
 }
