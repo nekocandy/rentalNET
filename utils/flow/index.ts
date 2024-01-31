@@ -1,5 +1,5 @@
 import { config } from '@onflow/fcl'
-import flowJSON from '~/flow.json'
+import flowJSON from '../../flow.json'
 
 const runtimeConfig = useRuntimeConfig().public
 export const network: 'mainnet' | 'testnet' | 'emulator' = (runtimeConfig.NETWORK as 'mainnet' | 'testnet' | 'emulator') || 'emulator'
@@ -24,6 +24,12 @@ const fclConfigInfo = {
 
 const { NC_ADDRESS } = runtimeConfig
 
+const ANCRESSES: Record<string, string> = {}
+
+Object.entries(flowJSON.contracts)
+  .filter(([_, value]) => typeof value === 'object')
+  .map(([key, contract]) => ANCRESSES[`0x${key}`] = `0x${(contract as any).aliases[network]}`)
+
 config({
   'app.detail.title': 'Kirai',
   'app.detail.icon': 'https://pycz.dev/favicon.svg',
@@ -32,4 +38,5 @@ config({
   'discovery.wallet': fclConfigInfo[network].discoveryWallet,
   'discovery.authn.include': fclConfigInfo[network].discoveryAuthInclude,
   '0xNC': NC_ADDRESS,
+  ...ANCRESSES,
 }).load({ flowJSON })
