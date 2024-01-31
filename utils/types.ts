@@ -21,3 +21,11 @@ export interface ReportData {
   report_user: string
   report_open: boolean
 }
+
+export interface NoticeData {
+  notice_id: string
+  notice_content: string
+  notice_timestamp: string
+  notice_user: string
+  notice_open: boolean
+}

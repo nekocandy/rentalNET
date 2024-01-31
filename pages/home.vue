@@ -16,6 +16,10 @@ const NAVIGATION_ITEMS = [
     name: 'Transparent Maintenance Requests',
     path: '/transparent-maintenance',
   },
+  {
+    name: 'Notices',
+    path: '/notices',
+  },
 ]
 </script>
 
