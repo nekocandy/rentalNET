@@ -84,13 +84,9 @@
     "testnet": "access.devnet.nodes.onflow.org:9000"
   },
   "accounts": {
-    "default": {
-      "address": "1551e7bac5519a9d",
-      "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
-    },
-    "emulator-account": {
-      "address": "f8d6e0586b0a20c7",
-      "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
+    "rentalnet": {
+      "address": "8bd9d939bcc912b3",
+      "key": "$RENTALNET_KEY"
     },
     "utility": {
       "address": "e392644b9278f81f",
@@ -98,15 +94,14 @@
     }
   },
   "deployments": {
-    "emulator": {
-      "default": [
+    "testnet": {
+      "rentalnet": [
         "RentAgreementEntry",
         "RentalNetDisputes",
         "RentalNetMaintenanceStore",
         "RentalNetNoticeBoard",
         "RentalNetRentalDatabase"
-      ],
-      "utility": []
+      ]
     }
   }
 }

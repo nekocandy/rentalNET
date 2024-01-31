@@ -61,7 +61,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       NETWORK: env.NETWORK,
-      NC_ADDRESS: env.NC_ADDRESS || `0x${flowConfig.accounts.default.address}`,
+      NC_ADDRESS: env.NC_ADDRESS,
       OWNER_ADDRESS: env.OWNER_ADDRESS,
     },
   },
