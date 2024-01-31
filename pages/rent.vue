@@ -11,13 +11,20 @@ const location = query.location as string
 const amount = query.amount as string
 const image = query.image as string
 const termsAccepted = ref(false)
+const termsAcceptedTxnId = ref<string | null>(null)
 
 async function acceptTerms() {
   const tosPromise = push.promise('Initiating Terms agreement transaction...')
 
   const tx = await fcl.mutate({
     cadence: RENT_AGREEMENT,
-    args: () => [],
+    // @ts-expect-error no typings available
+    args: (arg, t) => [
+      arg(
+        { identifier: `KiraiRentAgreement_ID_${houseId}`, domain: 'storage' },
+        t.Path,
+      ),
+    ],
   })
 
   TransactionModals.value.push({
@@ -26,7 +33,9 @@ async function acceptTerms() {
   })
 
   await fcl.tx(tx).onceSealed()
-  tosPromise.success('Terms agreement executed successfully!')
+  tosPromise.resolve('Terms agreement executed successfully!')
+  termsAccepted.value = true
+  termsAcceptedTxnId.value = tx
 }
 
 onMounted(() => {
@@ -111,9 +120,10 @@ onMounted(() => {
     </div>
 
     <div flex items-center gap-8>
-      <button px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="acceptTerms">
+      <button :disabled="termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="acceptTerms">
         Accept Terms!
       </button>
+      <span v-if="termsAcceptedTxnId" text-sm>Txn: {{ termsAcceptedTxnId }}</span>
       <button :disabled="!termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)">
         Rent
       </button>
