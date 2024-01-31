@@ -2,7 +2,7 @@ import RentalNetMaintenanceStore from 0xNC
 
 transaction(
     report_id: String,
-    report_complete: Bool
+    report_open: Bool
 ) {
     prepare(userAccount: AuthAccount) {
 
@@ -10,8 +10,8 @@ transaction(
 
     execute {
         RentalNetMaintenanceStore.updateReport(
-            report_id: String,
-            report_complete: Bool
+            report_id: report_id,
+            report_open: report_open
         )
     }
 }

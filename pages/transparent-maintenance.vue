@@ -2,6 +2,7 @@
 import * as fcl from '@onflow/fcl'
 import GET_REQUESTS from '~/cadence/scripts/getMaintenanceRequests.cdc?raw'
 import ADD_REQUEST from '~/cadence/transactions/createMaintenanceRequest.cdc?raw'
+import RESOLVE_REQUEST from '~/cadence/transactions/resolveMaintenanceRequest.cdc?raw'
 import type { ReportData } from '~/utils/types'
 
 const content = ref('')
@@ -39,6 +40,27 @@ async function submitRequest() {
 
   await fcl.tx(txn).onceSealed()
   content.value = ''
+  requestPromise.resolve('Done')
+  await getRequests()
+}
+
+async function resolveRequest(reportId: string) {
+  const requestPromise = push.promise(`Resolving Request on FLOW Blockchain | Id: ${reportId}`)
+  const txn = await fcl.mutate({
+    cadence: RESOLVE_REQUEST,
+    // @ts-expect-error no typings
+    args: (arg, t) => [
+      arg(reportId, t.String),
+      arg(false, t.Bool),
+    ],
+  })
+
+  TransactionModals.value.push({
+    title: 'Resolving Maintenance Request',
+    transactionId: txn,
+  })
+
+  await fcl.tx(txn).onceSealed()
   requestPromise.resolve('Done')
   await getRequests()
 }
@@ -82,10 +104,16 @@ onMounted(async () => {
             </span>
           </div>
 
-          <div flex items-center gap-1>
+          <div v-if="data.report_open" flex items-center gap-1>
             <button :disabled="userData?.addr !== data.report_user" border-2 border-teal-200 px-2 py-1 h-full class="disabled:(cursor-not-allowed text-zinc-400 border-zinc-400)" @click="resolveRequest(data.report_id)">
               Resolve
             </button>
+          </div>
+
+          <div v-else>
+            <span class="text-xs">
+              Resolved
+            </span>
           </div>
         </div>
       </div>

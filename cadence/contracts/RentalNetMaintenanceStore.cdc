@@ -19,6 +19,10 @@ pub contract RentalNetMaintenanceStore {
         }
     }
 
+    pub event ReportUpdated(
+        report_id: String,
+        report_open: Bool
+    )
     pub var report_store: [ReportInformation]
 
     pub fun addReport(
@@ -36,11 +40,15 @@ pub contract RentalNetMaintenanceStore {
 
     pub fun updateReport(
         report_id: String,
-        report_complete: Bool
+        report_open: Bool
     ) {
         for report in self.report_store {
             if report.report_id == report_id {
-                report.report_open = report_complete
+                report.report_open = report_open
+                emit ReportUpdated(
+                    report_id: report_id,
+                    report_open: report_open
+                )
             }
         }
     }
