@@ -52,13 +52,16 @@ export default defineNuxtConfig({
       },
     ],
   },
+  notivue: {
+    position: 'bottom-right',
+  },
   auth: {
     isEnabled: false,
   },
   runtimeConfig: {
     public: {
       NETWORK: env.NETWORK,
-      NC_ADDRESS: env.NC_ADDRESS || flowConfig.accounts.default.address,
+      NC_ADDRESS: env.NC_ADDRESS || `0x${flowConfig.accounts.default.address}`,
       OWNER_ADDRESS: env.OWNER_ADDRESS,
     },
   },
