@@ -8,6 +8,10 @@ const NAVIGATION_ITEMS = [
     name: 'My Rentals',
     path: '/my-rentals',
   },
+  {
+    name: 'Auto Payment',
+    path: '/auto-pay',
+  },
 ]
 </script>
 
