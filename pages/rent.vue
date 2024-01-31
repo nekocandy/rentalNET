@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as fcl from '@onflow/fcl'
 import RENT_AGREEMENT from '~/cadence/transactions/acceptRentAgreement.cdc?raw'
+import STORE_RENT_AGREEMENT from '~/cadence/transactions/addAgreement.cdc?raw'
 import { sendFlow } from '~/utils/flow/utils'
 
 const router = useRouter()
@@ -16,6 +17,10 @@ const securityDeposit = ref(2000)
 const securityDepositPaid = ref(false)
 const termsAcceptedTxnId = ref<string | null>(null)
 const securityDepositTxnId = ref<string | null>(null)
+const rentPaymentConfirmed = ref(false)
+const rentPaymentTxnId = ref<string | null>(null)
+const chainConfirmed = ref(false)
+const chainTxnId = ref<string | null>(null)
 
 async function acceptTerms() {
   const tosPromise = push.promise('Initiating Terms agreement transaction...')
@@ -75,7 +80,40 @@ async function sendRent() {
   })
 
   await fcl.tx(tx).onceSealed()
+  rentPaymentConfirmed.value = true
+  rentPaymentTxnId.value = tx
   rentPromise.resolve('Rent sent successfully!')
+
+  await storeOnChain()
+}
+
+async function storeOnChain() {
+  const storePromise = push.promise('Storing Rent Agreement on Chain...')
+
+  const tx = await fcl.mutate({
+    cadence: STORE_RENT_AGREEMENT,
+    // @ts-expect-error no typings available
+    args: (arg, t) => [
+      arg(houseId, t.String),
+      arg(location, t.String),
+      arg(image, t.String),
+      arg(OWNER_ADDRESS, t.Address),
+      arg(userData.value?.addr, t.Address),
+      arg(Number(amount).toFixed(2), t.UFix64),
+      arg(securityDeposit.value.toFixed(2), t.UFix64),
+      arg(termsAcceptedTxnId.value, t.String),
+    ],
+  })
+
+  TransactionModals.value.push({
+    title: `Storing Rent Agreement for ${houseId}`,
+    transactionId: tx,
+  })
+
+  await fcl.tx(tx).onceSealed()
+  chainConfirmed.value = true
+  chainTxnId.value = tx
+  storePromise.resolve('Rent Agreement stored successfully!')
 }
 
 onMounted(() => {
@@ -178,6 +216,14 @@ onMounted(() => {
         <button :disabled="!termsAccepted || !securityDepositPaid" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="sendRent">
           Rent and Save Details on FLOW
         </button>
+
+        <NuxtLink v-if="rentPaymentConfirmed" text-xs underline hover:underline-double :to="`https://testnet.flowdiver.io/tx/${rentPaymentTxnId}`" target="_blank" text-sm>
+          Rent Txn: {{ rentPaymentTxnId }}
+        </NuxtLink>
+
+        <NuxtLink v-if="chainConfirmed" text-xs underline hover:underline-double :to="`https://testnet.flowdiver.io/tx/${chainTxnId}`" target="_blank" text-sm>
+          Chain Store Txn: {{ chainTxnId }}
+        </NuxtLink>
       </div>
     </div>
   </div>
