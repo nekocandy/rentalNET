@@ -84,7 +84,7 @@ onMounted(async () => {
     </div>
 
     <div v-if="!isLoading" grid grid-cols-4>
-      <div v-for="data in requests" :key="data.dispute_id" border-4 px-4 py-4 flex flex-col gap-6 w-full bg-lime-200 text-black>
+      <div v-for="data in requests" :key="data.dispute_id" border-4 px-4 py-4 flex flex-col gap-6 w-full>
         <div flex items-center justify-between>
           Dispute ID: {{ data.dispute_id }}
           <span class="text-sm">
@@ -98,7 +98,7 @@ onMounted(async () => {
 
         <div flex items-center justify-between>
           <div flex items-center gap-1>
-            <span font-black text-xs>Issued By:</span>
+            <span font-black text-xs>Submission By:</span>
             <span class="text-xs">
               {{ data.dispute_user }}
             </span>

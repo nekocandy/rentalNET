@@ -20,6 +20,10 @@ const NAVIGATION_ITEMS = [
     name: 'Notices',
     path: '/notices',
   },
+  {
+    name: 'Disputes',
+    path: '/disputes',
+  },
 ]
 </script>
 
