@@ -24,6 +24,7 @@
         "testnet": "9a0766d93b6608b7"
       }
     },
+    "KiraiRentalDatabase": "cadence/contracts/KiraiRentalDatabase.cdc",
     "MetadataViews": {
       "source": "cadence/contracts/utility/MetadataViews.cdc",
       "aliases": {
@@ -81,7 +82,7 @@
   },
   "accounts": {
     "default": {
-      "address": "179b6b1cb6755e31",
+      "address": "0f7025fa05b578e3",
       "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
     },
     "emulator-account": {
@@ -89,13 +90,14 @@
       "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
     },
     "utility": {
-      "address": "f3fcd2c1a78f5eee",
+      "address": "06909bc5ba14c266",
       "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
     }
   },
   "deployments": {
     "emulator": {
       "default": [
+        "KiraiRentalDatabase",
         "RentAgreementEntry"
       ],
       "utility": []
