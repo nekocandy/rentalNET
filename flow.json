@@ -67,6 +67,7 @@
     },
     "RentAgreementEntry": "cadence/contracts/RentAgreementEntry.cdc",
     "RentalNetMaintenanceStore": "cadence/contracts/RentalNetMaintenanceStore.cdc",
+    "RentalNetNoticeBoard": "cadence/contracts/RentalnetNoticeBoard.cdc",
     "ViewResolver": {
       "source": "cadence/contracts/utility/ViewResolver.cdc",
       "aliases": {
@@ -83,7 +84,7 @@
   },
   "accounts": {
     "default": {
-      "address": "10c4fef62310c807",
+      "address": "ff8975b2fe6fb6f1",
       "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
     },
     "emulator-account": {
@@ -91,7 +92,7 @@
       "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
     },
     "utility": {
-      "address": "1beecc6fef95b62e",
+      "address": "0dbaa95c7691bc4f",
       "key": "6d12eebfef9866c9b6fa92b97c6e705c26a1785b1e7944da701fc545a51d4673"
     }
   },
@@ -100,7 +101,8 @@
       "default": [
         "KiraiRentalDatabase",
         "RentAgreementEntry",
-        "RentalNetMaintenanceStore"
+        "RentalNetMaintenanceStore",
+        "RentalNetNoticeBoard"
       ],
       "utility": []
     }
