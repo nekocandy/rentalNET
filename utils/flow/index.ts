@@ -31,7 +31,7 @@ Object.entries(flowJSON.contracts)
   .map(([key, contract]) => ANCRESSES[`0x${key}`] = `0x${(contract as any).aliases[network]}`)
 
 config({
-  'app.detail.title': 'Kirai',
+  'app.detail.title': 'RentalNET',
   'app.detail.icon': 'https://pycz.dev/favicon.svg',
   'flow.network': network,
   'accessNode.api': fclConfigInfo[network].accessNode,

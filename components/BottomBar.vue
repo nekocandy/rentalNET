@@ -33,7 +33,7 @@ onMounted(() => {
           <img src="" alt="">
         </div>
 
-        <span>Kirai</span>
+        <span>RentalNET</span>
       </NuxtLink>
 
       <div flex items-center gap-4>

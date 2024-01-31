@@ -30,7 +30,7 @@ async function acceptTerms() {
     // @ts-expect-error no typings available
     args: (arg, t) => [
       arg(
-        { identifier: `KiraiRentAgreement_ID_${houseId}`, domain: 'storage' },
+        { identifier: `RentalNetRentAgreement_ID_${houseId}`, domain: 'storage' },
         t.Path,
       ),
     ],

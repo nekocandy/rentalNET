@@ -1,4 +1,4 @@
-import KiraiRentalDatabase from 0xNC
+import RentalNetRentalDatabase from 0xNC
 
 transaction(
     id: String,
@@ -15,7 +15,7 @@ transaction(
     }
 
     execute {
-        KiraiRentalDatabase.add_rental_information(
+        RentalNetRentalDatabase.add_rental_information(
             id: id,
             location: location, 
             image: image, 

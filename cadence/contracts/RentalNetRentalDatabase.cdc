@@ -1,4 +1,4 @@
-pub contract KiraiRentalDatabase {
+pub contract RentalNetRentalDatabase {
     pub struct HouseInformation {
         pub let id: String
         pub let location: String

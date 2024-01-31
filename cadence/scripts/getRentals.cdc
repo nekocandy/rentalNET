@@ -1,5 +1,5 @@
-import KiraiRentalDatabase from 0xNC
+import RentalNetRentalDatabase from 0xNC
 
-pub fun main(): [KiraiRentalDatabase.RentalInformation] {
-    return KiraiRentalDatabase.rent_collection
+pub fun main(): [RentalNetRentalDatabase.RentalInformation] {
+    return RentalNetRentalDatabase.rent_collection
 }
