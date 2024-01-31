@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import FlowImage from '~/assets/flow.svg'
+import { unauthenticate } from '~/utils/flow/auth'
 
 const router = useRouter()
 const shouldShowLogo = computed(() => {
@@ -27,13 +28,13 @@ onMounted(() => {
     </div>
 
     <div v-else flex items-center justify-between gap-8>
-      <div flex items-center gap-4>
+      <NuxtLink to="/home" flex items-center gap-4>
         <div>
           <img src="" alt="">
         </div>
 
         <span>Kirai</span>
-      </div>
+      </NuxtLink>
 
       <div flex items-center gap-4>
         <!-- navigation -->
@@ -43,6 +44,10 @@ onMounted(() => {
         <div h-8 w-8 rounded-full bg-blue i-material-symbols-account-circle />
 
         <span>{{ userData?.addr }}</span>
+
+        <button py-2 px-4 bg-red rounded-md @click="unauthenticate">
+          <div i-ic-baseline-logout />
+        </button>
       </div>
     </div>
   </div>
