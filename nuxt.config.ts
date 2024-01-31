@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     public: {
       NETWORK: env.NETWORK,
       NC_ADDRESS: env.NC_ADDRESS,
+      OWNER_ADDRESS: env.OWNER_ADDRESS,
     },
   },
 })

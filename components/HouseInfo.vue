@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import { faker } from '@faker-js/faker'
 
-defineProps<{
+const props = defineProps<{
   image: string
 }>()
-
+const router = useRouter()
 const amount = faker.number.int({ min: 180, max: 2000 })
 const location = faker.location.city()
+
+function onRentClick() {
+  router.push({
+    path: '/rent',
+    query: {
+      location,
+      amount,
+      image: props.image,
+    },
+  })
+}
 </script>
 
 <template>
@@ -36,6 +47,10 @@ const location = faker.location.city()
         </h2>
       </div>
     </div>
+
+    <button px-8 py-2 font-bold w-full bg-teal-800 border-2 @click="onRentClick">
+      Rent
+    </button>
   </div>
 </template>
 
