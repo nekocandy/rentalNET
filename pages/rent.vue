@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as fcl from '@onflow/fcl'
 import RENT_AGREEMENT from '~/cadence/transactions/acceptRentAgreement.cdc?raw'
+import { sendFlow } from '~/utils/flow/utils'
 
 const router = useRouter()
 const { query } = useRoute()
@@ -36,6 +37,23 @@ async function acceptTerms() {
   tosPromise.resolve('Terms agreement executed successfully!')
   termsAccepted.value = true
   termsAcceptedTxnId.value = tx
+}
+
+async function sendRent() {
+  if (!termsAccepted.value)
+    return
+
+  const rentPromise = push.promise('Initiating Rent transaction...')
+
+  const tx = await sendFlow(OWNER_ADDRESS, amount.toString())
+
+  TransactionModals.value.push({
+    title: `Rent for ${houseId}`,
+    transactionId: tx,
+  })
+
+  await fcl.tx(tx).onceSealed()
+  rentPromise.resolve('Rent executed successfully!')
 }
 
 onMounted(() => {
@@ -123,8 +141,10 @@ onMounted(() => {
       <button :disabled="termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="acceptTerms">
         Accept Terms!
       </button>
-      <span v-if="termsAcceptedTxnId" text-sm>Txn: {{ termsAcceptedTxnId }}</span>
-      <button :disabled="!termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)">
+      <NuxtLink v-if="termsAcceptedTxnId" underline hover:underline-double :to="`https://testnet.flowdiver.io/tx/${termsAcceptedTxnId}`" target="_blank" text-sm>
+        Txn: {{ termsAcceptedTxnId }}
+      </NuxtLink>
+      <button :disabled="!termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="sendRent">
         Rent
       </button>
     </div>
