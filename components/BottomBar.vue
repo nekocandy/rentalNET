@@ -37,7 +37,9 @@ onMounted(() => {
       </NuxtLink>
 
       <div flex items-center gap-4>
-        <!-- navigation -->
+        <NuxtLink to="/home" class="hover:underline">
+          HOME
+        </NuxtLink>
       </div>
 
       <div flex items-center gap-2>
