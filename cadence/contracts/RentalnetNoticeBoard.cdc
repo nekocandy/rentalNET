@@ -38,7 +38,7 @@ pub contract RentalNetNoticeBoard {
         self.notice_store.append(new_notice)
     }
 
-    pub fun updatenotice(
+    pub fun updateNotice(
         notice_id: String,
         notice_open: Bool
     ) {
