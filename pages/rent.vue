@@ -12,7 +12,10 @@ const location = query.location as string
 const amount = query.amount as string
 const image = query.image as string
 const termsAccepted = ref(false)
+const securityDeposit = ref(2000)
+const securityDepositPaid = ref(false)
 const termsAcceptedTxnId = ref<string | null>(null)
+const securityDepositTxnId = ref<string | null>(null)
 
 async function acceptTerms() {
   const tosPromise = push.promise('Initiating Terms agreement transaction...')
@@ -39,6 +42,25 @@ async function acceptTerms() {
   termsAcceptedTxnId.value = tx
 }
 
+async function sendSecurityDeposit() {
+  if (!termsAccepted.value)
+    return
+
+  const rentPromise = push.promise('Initiating Security Deposit transaction...')
+
+  const tx = await sendFlow(OWNER_ADDRESS, securityDeposit.value.toString())
+
+  TransactionModals.value.push({
+    title: `Security Deposit for ${houseId}`,
+    transactionId: tx,
+  })
+
+  await fcl.tx(tx).onceSealed()
+  securityDepositPaid.value = true
+  securityDepositTxnId.value = tx
+  rentPromise.resolve('Security Deposit sent successfully!')
+}
+
 async function sendRent() {
   if (!termsAccepted.value)
     return
@@ -53,7 +75,7 @@ async function sendRent() {
   })
 
   await fcl.tx(tx).onceSealed()
-  rentPromise.resolve('Rent executed successfully!')
+  rentPromise.resolve('Rent sent successfully!')
 }
 
 onMounted(() => {
@@ -138,15 +160,29 @@ onMounted(() => {
     </div>
 
     <div flex items-center gap-8>
-      <button :disabled="termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="acceptTerms">
-        Accept Terms!
-      </button>
-      <NuxtLink v-if="termsAcceptedTxnId" underline hover:underline-double :to="`https://testnet.flowdiver.io/tx/${termsAcceptedTxnId}`" target="_blank" text-sm>
-        Txn: {{ termsAcceptedTxnId }}
-      </NuxtLink>
-      <button :disabled="!termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="sendRent">
-        Rent
-      </button>
+      <div flex flex-col gap-2>
+        <button :disabled="termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="acceptTerms">
+          Accept Terms!
+        </button>
+        <NuxtLink v-if="termsAcceptedTxnId" text-xs underline hover:underline-double :to="`https://testnet.flowdiver.io/tx/${termsAcceptedTxnId}`" target="_blank" text-sm>
+          Txn: {{ termsAcceptedTxnId }}
+        </NuxtLink>
+      </div>
+      <div flex flex-col gap-2>
+        <button :disabled="!termsAccepted" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="sendSecurityDeposit">
+          Security Deposit ({{ securityDeposit }} $FLOW)
+        </button>
+
+        <NuxtLink v-if="securityDepositPaid" text-xs underline hover:underline-double :to="`https://testnet.flowdiver.io/tx/${securityDepositTxnId}`" target="_blank" text-sm>
+          Txn: {{ securityDepositTxnId }}
+        </NuxtLink>
+      </div>
+
+      <div flex flex-col gap-2>
+        <button :disabled="!termsAccepted || !securityDepositPaid" px-12 py-2 bg-teal-700 border-2 class="disabled:(opacity-70 cursor-not-allowed)" @click="sendRent">
+          Rent
+        </button>
+      </div>
     </div>
   </div>
 </template>
