@@ -83,7 +83,7 @@ onMounted(async () => {
       </button>
     </div>
 
-    <div v-if="!isLoading" grid grid-cols-4>
+    <div v-if="requests.length" grid grid-cols-4>
       <div v-for="data in requests" :key="data.report_id" border-4 px-4 py-4 flex flex-col gap-6 w-full>
         <div flex items-center justify-between>
           Report ID: {{ data.report_id }}
@@ -117,6 +117,9 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+    </div>
+    <div v-else>
+      No Maintenance Requests
     </div>
   </div>
 </template>
