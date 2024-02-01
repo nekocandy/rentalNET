@@ -22,7 +22,6 @@ async function getRequests() {
 
 async function submitRequest() {
   const disputeId = nanoid(10)
-  const requestPromise = push.promise(`Submitting Dispute on FLOW Blockchain | Id: ${disputeId}`)
   const txn = await fcl.mutate({
     cadence: ADD_REQUEST,
     // @ts-expect-error no typings
@@ -40,12 +39,10 @@ async function submitRequest() {
 
   await fcl.tx(txn).onceSealed()
   content.value = ''
-  requestPromise.resolve('Done')
   await getRequests()
 }
 
 async function resolveRequest(disputeId: string) {
-  const requestPromise = push.promise(`Resolving Dispute on FLOW Blockchain | Id: ${disputeId}`)
   const txn = await fcl.mutate({
     cadence: RESOLVE_REQUEST,
     // @ts-expect-error no typings
@@ -61,7 +58,6 @@ async function resolveRequest(disputeId: string) {
   })
 
   await fcl.tx(txn).onceSealed()
-  requestPromise.resolve('Done')
   await getRequests()
 }
 

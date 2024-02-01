@@ -23,7 +23,7 @@ const chainConfirmed = ref(false)
 const chainTxnId = ref<string | null>(null)
 
 async function acceptTerms() {
-  const tosPromise = push.promise('Initiating Terms agreement transaction...')
+  // const tosPromise = push.promise('Initiating Terms agreement transaction...')
 
   const tx = await fcl.mutate({
     cadence: RENT_AGREEMENT,
@@ -42,7 +42,7 @@ async function acceptTerms() {
   })
 
   await fcl.tx(tx).onceSealed()
-  tosPromise.resolve('Terms agreement executed successfully!')
+  // tosPromise.resolve('Terms agreement executed successfully!')
   termsAccepted.value = true
   termsAcceptedTxnId.value = tx
 }
@@ -51,7 +51,7 @@ async function sendSecurityDeposit() {
   if (!termsAccepted.value)
     return
 
-  const rentPromise = push.promise('Initiating Security Deposit transaction...')
+  // const rentPromise = push.promise('Initiating Security Deposit transaction...')
 
   const tx = await sendFlow(OWNER_ADDRESS, securityDeposit.value.toString())
 
@@ -63,14 +63,14 @@ async function sendSecurityDeposit() {
   await fcl.tx(tx).onceSealed()
   securityDepositPaid.value = true
   securityDepositTxnId.value = tx
-  rentPromise.resolve('Security Deposit sent successfully!')
+  // rentPromise.resolve('Security Deposit sent successfully!')
 }
 
 async function sendRent() {
   if (!termsAccepted.value)
     return
 
-  const rentPromise = push.promise('Initiating Rent transaction...')
+  // const rentPromise = push.promise('Initiating Rent transaction...')
 
   const tx = await sendFlow(OWNER_ADDRESS, amount.toString())
 
@@ -82,13 +82,13 @@ async function sendRent() {
   await fcl.tx(tx).onceSealed()
   rentPaymentConfirmed.value = true
   rentPaymentTxnId.value = tx
-  rentPromise.resolve('Rent sent successfully!')
+  // rentPromise.resolve('Rent sent successfully!')
 
   await storeOnChain()
 }
 
 async function storeOnChain() {
-  const storePromise = push.promise('Storing Rent Agreement on Chain...')
+  // const storePromise = push.promise('Storing Rent Agreement on Chain...')
 
   const tx = await fcl.mutate({
     cadence: STORE_RENT_AGREEMENT,
@@ -113,7 +113,7 @@ async function storeOnChain() {
   await fcl.tx(tx).onceSealed()
   chainConfirmed.value = true
   chainTxnId.value = tx
-  storePromise.resolve('Rent Agreement stored successfully!')
+  // storePromise.resolve('Rent Agreement stored successfully!')
 }
 
 onMounted(() => {
