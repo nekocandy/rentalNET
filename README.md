@@ -1,3 +1,1 @@
-# Nuxt
-
-opinionated nuxt config
+# RentalNET
